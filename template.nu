@@ -18,6 +18,11 @@ def "main csharp" [day: string] {
     dotnet add $"($day).Core" reference $"($day).Common"
     dotnet add $"($day).Testing" reference $"($day).Common"
 
+    # clean files
+    rm $"($day).Core/Program.cs"
+    rm $"($day).Common/Class1.cs"
+    rm $"($day).Testing/UnitTest1.cs"
+
     # add code to files
     # add code for solution.cs
     echo $"namespace ($day).Common;
