@@ -7,8 +7,12 @@ public static class Solution
         var cards = new List<double>();
         foreach (var line in input.Split(Environment.NewLine))
         {
-            var numbersStart = line.IndexOf(":") + 2;
-            var card = line[numbersStart..].Split("|");
+            var numbersStart = line.IndexOf(":");
+            if (numbersStart == -1)
+            {
+                continue;
+            }
+            var card = line[(numbersStart + 2)..].Split("|");
             var winningNumbers = card[0]
                 .Split(" ")
                 .Where(str => str.Length > 0)
@@ -41,8 +45,59 @@ public static class Solution
         return cards.Sum();
     }
 
-    public static int PartTwo(string input)
+    public static double PartTwo(string input)
     {
-        return -1;
+        var lines = input.Split(Environment.NewLine);
+        var copies = new List<int>(lines.Count());
+        for (var i = 0; i < lines.Count(); ++i)
+        {
+            copies.Add(0);
+        }
+
+        for (var i = 0; i < lines.Count(); ++i)
+        {
+            var line = lines[i];
+            var numbersStart = line.IndexOf(":");
+            if (numbersStart == -1)
+            {
+                continue;
+            }
+            var card = line[(numbersStart + 2)..].Split("|");
+            var winningNumbers = card[0]
+                .Split(" ")
+                .Where(str => str.Length > 0)
+                .Select(str => int.Parse(str));
+            var myNumbers = card[1]
+                .Split(" ")
+                .Where(str => str.Length > 0)
+                .Select(str => int.Parse(str));
+
+            var wins = 0;
+
+            foreach (var myNumber in myNumbers)
+            {
+                if (winningNumbers.Contains(myNumber))
+                {
+                    wins++;
+                }
+            }
+
+            // increment original
+            for (var j = 0; j <= wins; ++j)
+            {
+                copies[i + j] += 1;
+            }
+
+            // increment copies
+            for (var j = 0; j < copies[i] - 1; ++j)
+            {
+                for (var k = 1; k <= wins; ++k)
+                {
+                    copies[i + k] += 1;
+                }
+            }
+        }
+
+        return copies.Sum();
     }
 }
