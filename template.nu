@@ -18,11 +18,6 @@ def "main csharp" [day: string] {
     dotnet add $"($day).Core" reference $"($day).Common"
     dotnet add $"($day).Testing" reference $"($day).Common"
 
-    # clean files
-    rm $"($day).Core/Program.cs"
-    rm $"($day).Common/Class1.cs"
-    rm $"($day).Testing/UnitTest1.cs"
-
     # add code to files
     # add code for solution.cs
     echo $"namespace ($day).Common;
@@ -38,7 +33,7 @@ public static class Solution
         return -1;
     }
 }
-" | save --raw $"($day).Common/Solution.cs"
+" | save --raw --force $"($day).Common/Solution.cs"
 
     # add code for program.cs
     echo $"using ($day).Common;
@@ -50,7 +45,7 @@ Console.WriteLine\($\"Part 1: {part1}\");
 var input2 = File.ReadAllText\(\"input2\");
 var part2 = Solution.PartTwo\(input2);
 Console.WriteLine\($\"Part 2: {part2}\");
-" | save --raw $"($day).Core/Program.cs"
+" | save --raw --force $"($day).Core/Program.cs"
 
     # add code for unit test
     echo $"namespace ($day).Testing;
@@ -73,7 +68,7 @@ public class UnitTest1
         Assert.Equal\(8, Common.Solution.PartTwo\(input));
     }
 }
-" | save --raw $"($day).Testing/UnitTest1.cs"
+" | save --raw --force $"($day).Testing/UnitTest1.cs"
 }
 
 def main [] {}
