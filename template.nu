@@ -29,12 +29,13 @@ def "main csharp" [day: string] {
 
 public static class Solution
 {
-    public static int PartOne\(string input){
-
+    public static int PartOne\(string input)
+    {
         return -1;
     }
 
-    public static int PartTwo\(string input){
+    public static int PartTwo\(string input)
+    {
         return -1;
     }
 }
@@ -47,7 +48,7 @@ var input1 = File.ReadAllText\(\"input1\");
 var part1 = Solution.PartOne\(input1);
 Console.WriteLine\($\"Part 1: {part1}\");
 
-var input2 = File.ReadAllText\(\"input2\");
+var input2 = File.ReadAllText\(\"input1\");
 var part2 = Solution.PartTwo\(input2);
 Console.WriteLine\($\"Part 2: {part2}\");
 " | save --raw --force $"($day).Core/Program.cs"
