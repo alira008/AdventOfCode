@@ -5,16 +5,19 @@ public class UnitTest1
     [Fact]
     public void Test1()
     {
-        var input = @"";
+        var input =
+            @"Time:      7  15   30
+Distance:  9  40  200";
 
-        Assert.Equal(8, Common.Solution.PartOne(input));
+        Assert.Equal(288, Common.Solution.PartOne(input));
     }
 
     [Fact]
     public void Test2()
     {
-        var input = @"";
+        var input = @"Time:      7  15   30
+Distance:  9  40  200";
 
-        Assert.Equal(8, Common.Solution.PartTwo(input));
+        Assert.Equal(71503, Common.Solution.PartTwo(input));
     }
 }
