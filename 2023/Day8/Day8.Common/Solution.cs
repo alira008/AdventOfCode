@@ -51,7 +51,7 @@ public static class Solution
         return steps;
     }
 
-    public static int PartTwo(string input)
+    public static long PartTwo(string input)
     {
         var lines = input.Split(Environment.NewLine).Where(x => !string.IsNullOrWhiteSpace(x));
 
@@ -71,33 +71,43 @@ public static class Solution
         }
 
         var instructions = lines.First();
-        var currentInstruction = 0;
-        var steps = 0;
-        while (currentNodes.Where(node => node.Last() == 'Z').Count() != currentNodes.Count())
+        List<long> stepsPerNode = new();
+        for (var i = 0; i < currentNodes.Count(); ++i)
         {
-            if (currentInstruction >= instructions.Length)
+            var node = currentNodes[i];
+            var currentInstruction = 0;
+            var steps = 0;
+            while (node.Last() != 'Z')
             {
-                currentInstruction = 0;
-            }
-
-            for (var i = 0; i < currentNodes.Count(); ++i)
-            {
-                var node = currentNodes[i];
+                if (currentInstruction >= instructions.Length)
+                {
+                    currentInstruction = 0;
+                }
                 var (left, right) = maps[node];
 
                 if (instructions[currentInstruction] == 'R')
                 {
-                    currentNodes[i] = right;
+                    node = right;
                 }
                 else
                 {
-                    currentNodes[i] = left;
+                    node = left;
                 }
+                currentInstruction += 1;
+                steps += 1;
             }
-            steps += 1;
-            currentInstruction += 1;
+            stepsPerNode.Add(steps);
         }
 
-        return steps;
+        long lcm = stepsPerNode[0];
+        for(var i = 0; i < stepsPerNode.Count(); ++i){
+            lcm = Lcm(lcm, stepsPerNode[i]);
+        }
+
+        return lcm;
     }
+
+    static long Lcm(long a, long b) => Math.Abs(a * b) / Gcd(a, b);
+
+    static long Gcd(long a, long b) => b == 0 ? a : Gcd(b, a % b);
 }
