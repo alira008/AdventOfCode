@@ -26,11 +26,19 @@ LJ.LJ";
         Assert.Equal(8, Common.Solution.PartOne(input));
     }
 
-    // [Fact]
+    [Fact]
     public void Test3()
     {
-        var input = @"";
+        var input = @"...........
+.S-------7.
+.|F-----7|.
+.||.....||.
+.||.....||.
+.|L-7.F-J|.
+.|..|.|..|.
+.L--J.L--J.
+...........";
 
-        Assert.Equal(8, Common.Solution.PartTwo(input));
+        Assert.Equal(4, Common.Solution.PartTwo(input));
     }
 }
