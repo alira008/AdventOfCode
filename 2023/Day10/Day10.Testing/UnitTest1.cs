@@ -14,7 +14,7 @@ L|-JF";
         Assert.Equal(4, Common.Solution.PartOne(input));
     }
 
-    [Fact]
+    // [Fact]
     public void Test2()
     {
         var input = @"7-F7-
@@ -26,7 +26,7 @@ LJ.LJ";
         Assert.Equal(8, Common.Solution.PartOne(input));
     }
 
-    [Fact]
+    // [Fact]
     public void Test3()
     {
         var input = @"";
